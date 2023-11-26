@@ -102,7 +102,7 @@ lazy val shortform = (project in file("."))
     crypto,
     model,
     db,
-    api
+    app
    )
   .settings(sharedSettings)
   .settings(name := "shortform")
@@ -181,11 +181,11 @@ lazy val `db-integration-tests` = project
     )
   )
 
-lazy val api = project
-  .in(file("modules/api"))
+lazy val app = project
+  .in(file("modules/app"))
   .enablePlugins(JavaServerAppPackaging)
   .dependsOn(uuid, error, crypto, model, db)
-  .settings(name := s"$ProjectName-api")
+  .settings(name := s"$ProjectName-app")
   .settings(sharedSettings)
   .settings(testSettings)
   .settings(
