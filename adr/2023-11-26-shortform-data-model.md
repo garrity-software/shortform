@@ -32,17 +32,17 @@ Comments may only include text.
 
 ## Relational Data Model
 
-- [Table: `content`](#table-content)
+- [Table: `posts`](#table-posts)
 - [Table: `comments`](#table-comments)
 - [Table: `assets`](#table-assets)
 - [Table: `tags`](#table-tags)
-- [Table: `content_tags`](#table-content_tags)
+- [Table: `post_tags`](#table-post_tags)
 - [Table: `asset_tags`](#table-asset_tags)
 
-### Table: `content`
+### Table: `posts`
 
 ```sql
-CREATE TABLE content(
+CREATE TABLE posts(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     external_id UUID NOT NULL UNIQUE,
     created_at TIMESTAMPTZ NOT NULL,
@@ -58,16 +58,18 @@ CREATE TABLE content(
 CREATE TABLE comments(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     external_id UUID NOT NULL UNIQUE,
+    post_id BIGINT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL,
     created_by BIGINT NOT NULL,
-    content TEXT NOT NULL,
+    contents TEXT NOT NULL,
+    depth INT NOT NULL,
     parent BIGINT NULL,
 );
 ```
 
 Comments store their content directly. Comments are not complex, and are 
-typically shorter than primary content. The practical limit for PostgreSQL is
-1gb per row, but ShortForm imposes a configurable limit (10kb by default).
+typically shorter than posts. The practical limit for PostgreSQL is 1gb per row, 
+but ShortForm imposes a configurable limit (10kb by default).
 
 ### Table: `assets`
 
@@ -95,13 +97,13 @@ CREATE TABLE tags(
 
 Tags are arbitrary labels that authors may assign to top level posts and assets.
 
-### Table: `content_tags`
+### Table: `post_tags`
 
 ```sql
-CREATE TABLE content_tags(
-    content_id BIGINT NOT NULL,
+CREATE TABLE post_tags(
+    post_id BIGINT NOT NULL,
     tag_id BIGINT NOT NULL,
-    PRIMARY KEY(content_id, tag_id)
+    PRIMARY KEY(post_id, tag_id)
 );
 ```
 

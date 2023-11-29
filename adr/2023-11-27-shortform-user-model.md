@@ -53,11 +53,11 @@ CREATE TYPE user_status AS ENUM ('active', 'locked', 'initializing');
 ```sql
 CREATE TABLE users(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    created_at TIMESTAMPTZ NOT NULL,
     username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     role user_role NOT NULL,
-    status user_status NOT NULL
+    status user_status NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL
 );
 ```
 
@@ -66,9 +66,9 @@ CREATE TABLE users(
 ```sql
 CREATE TABLE password_resets(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    token TEXT NOT NULL UNIQUE,
     created_at TIMESTAMPTZ NOT NULL,
     expires_at TIMESTAMPTZ NOT NULL,
-    token TEXT NOT NULL,
     used BOOLEAN NOT NULL
 );
 ```
