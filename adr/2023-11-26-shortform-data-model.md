@@ -77,12 +77,11 @@ but ShortForm imposes a configurable limit (10kb by default).
 CREATE TABLE assets(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     external_id UUID NOT NULL UNIQUE,
-    created_at TIMESTAMPTZ NOT NULL,
-    created_by BIGINT NOT NULL,
-    mime TEXT NOT NULL,
     title TEXT NOT NULL,
     extension TEXT NOT NULL,
-    hash TEXT NOT NULL
+    hash TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL,
+    created_by BIGINT NOT NULL
 );
 ```
 

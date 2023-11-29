@@ -12,8 +12,9 @@ object Username:
   given CanEqual[Username, Username] = CanEqual.derived
 
   extension (title: Username)
+    /**
+     * Render this [[Username]] as a string.
+     */
     def str(): String = title
 
 end Username
-
-

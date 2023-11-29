@@ -15,11 +15,13 @@ import gs.shortform.crypto.Hash
   * @param createdBy User who created this post.
   * @param title Display title for this post.
   * @param hash Hash of the primary rendered file for this post.
+  * @param tags List of [[Tag]] applied to this post.
   */
 case class Post(
   externalId: UUID,
   createdAt: CreatedAt,
   createdBy: Username,
   title: Title, 
-  hash: Hash
+  hash: Hash,
+  tags: List[Tag]
 )
