@@ -79,6 +79,12 @@ lazy val deps = new {
 
     val CatsEffect: ModuleID =
       "org.typelevel" %% "cats-effect" % "3.5.2"
+
+    val JUG: ModuleID =
+      "com.fasterxml.uuid" % "java-uuid-generator" % "4.1.1"
+
+    val BouncyCastle: ModuleID =
+      "org.bouncycastle" % "bcprov-jdk18on" % "1.76"
 }
 
 lazy val testDeps = new {
@@ -114,7 +120,7 @@ lazy val uuid = project
   .settings(testSettings)
   .settings(
     libraryDependencies ++= Seq(
-      "com.fasterxml.uuid" % "java-uuid-generator" % "4.1.1"
+      deps.JUG
     )
   )
 
@@ -136,6 +142,8 @@ lazy val crypto = project
   .settings(testSettings)
   .settings(
     libraryDependencies ++= Seq(
+      deps.BouncyCastle,
+      deps.CatsEffect
     )
   )
 

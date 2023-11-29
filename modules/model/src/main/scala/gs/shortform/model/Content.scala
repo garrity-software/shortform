@@ -19,7 +19,7 @@ import gs.shortform.crypto.Hash
 case class Content(
   externalId: UUID,
   createdAt: CreatedAt,
-  createdBy: CreatedBy,
+  createdBy: Username,
   title: Title, 
   hash: Hash
 )
